@@ -1,0 +1,105 @@
+spring:
+  profiles:
+    active: local
+  messages:
+    basename: messages,ValidationMessages,PropertyNames
+    cache-duration: -1
+    encoding: UTF-8
+  servlet:
+    multipart:
+      max-file-size: -1      max-request-size: 20MB
+  main:
+    allow-bean-definition-overriding: true
+  thymeleaf:
+    # HTML5モードが非推奨になったのでHTMLモードにする
+    mode: HTML
+  jackson:
+    # JSONのキーをアンダースコア区切りの文字列にする
+    property-naming-strategy: CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES  
+  mail:
+    default-encoding: ISO-2022-JP
+#    host: mail.fujinetworks.co.jp  富士ネットのホストを使用する場合
+#    port: 25
+    host: smtp.gmail.com
+    port: 587
+    username: fujinet.h.yoshino2@gmail.com
+    password: kbcowhfsfanpscgx #googleアプリパスワード
+    properties.mail.smtp.auth: true
+    properties.mail.smtp.starttls.enable: true
+  session:
+    jdbc:
+      # spring-session-jdbcに必要なテーブルを作成する
+      initialize-schema: always
+      schema: classpath:org/springframework/session/jdbc/schema-mysql.sql
+      table-name: SPRING_SESSION
+    store-type: JDBC
+  resources:
+    # 静的コンテンツをキャッシュする
+    cache:
+      period: 604800
+    chain:
+      # GZipされているリソースがあれば使う
+      compressed: true
+      strategy:
+        content:
+          # コンテンツのMD5ハッシュ値によるバージョニング
+          enabled: true
+          paths: /**
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/actualboot?serverTimezone=JST&useSSL=false
+    username: root
+    password: root
+    hikari:
+      autoCommit: false
+      connectionTimeout: 30000
+      idleTimeout: 30000
+      maxLifetime: 1800000
+      connectionTestQuery: SELECT 1
+      minimumIdle: 10
+      maximumPoolSize: 30
+  batch:
+    job:
+      # 自動的にバッチジョブが起動しないようにする
+      enabled: false
+#  h2.console.enabled: true    
+logging:
+  level:
+    org.springframework: INFO
+    org.springframework.jdbc: INFO
+    org.thymeleaf: DEBUG
+    com.example: DEBUG
+#  pattern:
+#    level:"[{LOGIN_USER_ID}] %5p"
+doma:
+  dialect: mysql
+  # 小文字のスネークケースに変換する（firstName → first_name）
+  naming: SNAKE_LOWER_CASE
+  # バルクインサート・アップデートのサイズ
+  batch-size: 1000
+jmx:
+  enabled: false
+
+####
+# アプリケーションの設定
+application:
+  fileUploadLocation:  /tmp/sample
+
+####
+# 検証用の送受信先メールアドレスの設定
+fromaddress: test@mail.com
+toaddress: h.yoshino2@fujinetworks.co.jp
+
+
+
+
+#server:
+#  port: 18081
+#  compression:
+#    enabled: true
+#  servlet:
+#    session:
+#      timeout: 7200
+#      # URLにセッションIDを出力しないようにする
+#      tracking-modes: cookie
+#    contextPath: /admin
