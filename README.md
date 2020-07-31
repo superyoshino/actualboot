@@ -1,6 +1,5 @@
 # actualboot
-本プロジェクトは、「Spring Boot2徹底活用」(以下教材)で取り扱われているサンプルプロジェクトhttps://github.com/miyabayt/spring-boot-doma2-sample
-を自社の学習用にコーディングし独自の改変を行ったもの。
+本プロジェクトは、「Spring Boot2徹底活用」(以下教材)で取り扱われているサンプルプロジェクトhttps://github.com/miyabayt/spring-boot-doma2-sample を自社の学習用にコーディングし独自の改変を行ったもの。
 基本的にはサンプルプロジェクトのREADME.mdに、必要な環境構築方法や説明が記載されている。 
 ## 注意点
 ### ※学習を始める時点でいくつかの前提知識が求められる。
